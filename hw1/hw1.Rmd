@@ -8,6 +8,8 @@ date: '9/19/23'
 output: 
   html_document
 ---
+
+Good job Nathan. 20/20. 
 Make sure that you have accepted the hw invitation link, and working with your clone repository.
 
 **Due date:** September 21 beginning of class.

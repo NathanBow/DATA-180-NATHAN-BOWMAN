@@ -8,6 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`' # no need to change date since this 
 output: 
   html_document
 ---
+16/20
 
 Make sure that you have accepted the hw invitation link, and working with your clone repository.
 
@@ -83,6 +84,8 @@ hist(horsepower,col ='orange',main='Histogram of Horsepower',xlab='Horsepower',y
 b) Create a second histogram with breaks at 25 HP increments instead of 50.
 ```{r}
 hist(horsepower,breaks=25,col='yellow',main='Histogram of Horsepower (Breaks at 25 HP)',xlab='Horsepower',ylab='Frequency',ylim=c(0,35),cex=1.2)
+
+#These are not 25 HP increments (-2)
 ```
 
 * Use the breaks argument to define the classes
@@ -106,6 +109,8 @@ b) Correct the problem in part (a) by creating a more appropriate visualization.
 ```{r}
 pass_freq_table <- table(passengers)
 pie(pass_freq_table,main="Frequency of Passengers",col=colors,cex=1.2)
+
+### For this question I was looking for a barplot to show cars that carry 1 or 3 passangers have a frequency of 0. (-2)
 ```
 
 ## Task 4 

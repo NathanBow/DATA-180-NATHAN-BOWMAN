@@ -8,6 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
 ---
+18/20. Good job
 
 **Due date:** October 26 beginning of class.
 
@@ -18,7 +19,7 @@ Let's get some practice with **dplyr**! For this assignment, you will work with 
 First, load in dplyr. Make sure to install dplyr (or tidyverse in general) first before calling the packages. (Notice the chunk below uses warning=FALSE and message=FALSE so that unnecessary messages won't contaminate your md output!)
 
 ```{r}
-install.packages("dplyr")
+#install.packages("dplyr")
 ```
 
 For the entire assignment, make sure to use dplyr functions only. (no base R!)
@@ -91,11 +92,12 @@ records %>% group_by(year) %>% summarize(mean_record_time)
 Continuing with your results in Question 6: Do you notice a trend across years? Are the record times getting faster, slower, or no clear pattern in time? Create a barplot where each year appears on the x axis (you can treat year as a categorical variable in this case) and y axis showing the mean record time in each year. Interpret your graph. *Hint: Use your code in Question 6, which returns the average record times by year, followed by ` %>% ggplot(aes(year,mean)) + geom_bar(stat='identity')` Hint2: To make your figure wider, you can insert fig.width=10 inside the curly brackets at the beginning of your r code chunk below, as {r, fig.width=10} which I already did for you below,*
 
 ```{r, fig.width=10}
-install.packages("ggplot2")
+#install.packages("ggplot2")
 library(ggplot2) 
 records %>% group_by(year) %>% summarize(mean_record_time) 
-average_record_time_by_year %>% ggplot(aes(year, mean_record_time)) +
-  geom_bar(stat='identity') 
+average_record_time_by_year %>% ggplot(aes(year, mean_record_time)) +geom_bar(stat='identity') 
+
+# code breaking on this task (-2) 
 ```
 There is no clear pattern in the trend of record times, however, the extremes have grown farther apart as time has gone on. 
 

@@ -8,7 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
 ---
-
+20/20. Goog job. 
 **Due date:** November 2 beginning of class.
 
 # Question 1
@@ -141,8 +141,9 @@ vertebrate_data <- subset(vertebrate, select = -c(Name))
 vertebrate_dist <- dist(vertebrate_data, method = "euclidean")
 row.names(vertebrate_dist) <- vertebrate$Animal
 colnames(vertebrate_dist) <- vertebrate$Animal
+
 hierarchial_cluster <- hclust(vertebrate_dist, method = "complete")
-plot(hierarchical_cluster, main = "Dendrogram - Euclidean, Complete Linkage", sub = "", xlab = "Vertebrates", cex.lab = 1.25)
+plot(hierarchial_cluster, main = "Dendrogram - Euclidean, Complete Linkage", sub = "", xlab = "Vertebrates", cex.lab = 1.25)
 ```
 
 (ii)using the Manhattan metric with single linkage and

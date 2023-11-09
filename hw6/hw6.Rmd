@@ -2,7 +2,7 @@
 title: "HW 6"
 subtitle: "Data 180, Professor Kennedy"
 author: 
-  name: "Nathan Bowman"
+  name: "Nathan Bowman" 
   email: "bowmanna@dickinson.edu"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
@@ -117,7 +117,7 @@ for (k in 1:8)
   wgss_values[k] <- kmeans_result$tot.withinss}
 plot(1:8, wgss_values, type = "b", xlab = "Number of Clusters", ylab = "WGSS", main = "WGSS by Number of Clusters")
 
-#The elbow plot suggests two clusters. WGSS is diminishing after two clusters. The dendrogram, however, gave the impression that four clusters is best, as the vertical distance is longest around height four. 
+#The elbow plot suggests two clusters. WGSS is diminishing after two clusters. The dendrogram, however, gave the impression that four clusters is best, as the vertical distance is longest around height four.
 ```
 
 

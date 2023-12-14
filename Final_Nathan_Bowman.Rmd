@@ -1,0 +1,156 @@
+---
+title: "Data 180 Final"
+output: html_document
+date: "2023-12-09"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Nathan Bowman
+12/9/23
+Prof. Odongo
+Data 180
+
+#Imported data set via excel and skipped first line so variable names are not apart of data set
+
+1.	Data wrangling:
+  
+  a.	What is the dimension (shape) of the data set?  How many rows and columns does the data set have?
+
+```{r}
+dim(loan_default_data_set)
+```
+
+There are 20000 rows and 21 columns in the data set.
+
+  b.	Report the column names of the data set.
+
+```{r}
+colnames(loan_default_data_set)
+```
+The column names are:
+ [1] "tot_balance"                    
+ [2] "avg_bal_cards"                  
+ [3] "credit_age"                     
+ [4] "credit_age_good_account"        
+ [5] "credit_card_age"                
+ [6] "num_acc_30d_past_due_12_months" 
+ [7] "num_acc_30d_past_due_6_months"  
+ [8] "num_mortgage_currently_past_due"
+ [9] "tot_amount_currently_past_due"  
+[10] "num_inq_12_month"               
+[11] "num_card_inq_24_month"          
+[12] "num_card_12_month"              
+[13] "num_auto_ 36_month"             
+[14] "uti_open_card"                  
+[15] "pct_over_50_uti"                
+[16] "uti_max_credit_line"            
+[17] "pct_card_over_50_uti"           
+[18] "ind_XYZ"                        
+[19] "rep_income"                     
+[20] "rep_education"                  
+[21] "Def_ind"         
+ 
+  c.	Which types of data are there in the dataset? Numeric, categorical, ordinal?
+
+```{r}
+str(loan_default_data_set)
+```
+
+The data set contains 20 columns with numeric data and one column with character data.
+
+  d.	Which columns contain missing values and how much (what percent) of those columns are missing?
+  
+```{r}
+colnames(loan_default_data_set)[colSums(is.na(loan_default_data_set)) > 0]
+colMeans(is.na(loan_default_data_set)) * 100
+```
+
+The column "pct_card_over_50_uti" is missing 9.79% of values, "rep_income" is missing 7.795%, and "rep_education" is missing 0.005 %.
+
+  e.	How do you think we should deal with missing values? 
+  
+I think the best way to deal with the missing values is to remove any row containing missing values. Given the context of the data set (a financial institution considering 20,000 applicants for credit), as well as the low percentage of rows with missing values (9%), it is not worth the risk of approving someone for credit without their full information. 
+  
+  f.	With this data, would you fit a supervised or an unsupervised learning model? Why? 
+  
+This data set would fit a supervised learning model as it gives us data classified into 21 columns of information important for considering acceptance of credit loans. It can be used to model relationships between the predictor and repsonse variables. 
+  
+  g.	For part 2 and 3 drop all rows of the data that contain missing values. Print the dimensions of the resulting data set that has no missing values.
+  
+```{r}
+cleaned_loan_default_data_set <- na.omit(loan_default_data_set)
+
+dim(cleaned_loan_default_data_set)
+```
+
+The dimensions of the data set with no missing values is 16,653 rows and 21 columns. 
+
+2.	Data summary statistics:
+
+  a.	Find the summary statistics of the data set. You can use the summary function from dplyr. 
+
+```{r}
+library(dplyr)
+
+summary(cleaned_loan_default_data_set)
+```
+
+  b.	Based on the mean, mode, and median, is “num_card_inq_24_month” bell shaped, left, right skewed? How about “tot_amount_currently_past_due”? “credit_age”? 
+
+Based on the summary statistics for num_card_ing_24_month, the data for this variable is skewed right becuase of a median value of 0, but a maximum value of 18 pulling the mean up to 1.044. tot_amount_currently_past_due is skewed right with a median of 0 and a max of 35000 pulling the mean up to 354.2. credit_age is bell shaped due to the median being the same as the mean, and those values being about halfway between the min and max. 
+
+  c.	Plot a histogram of the variables in b above. Do the shapes of the histograms confirm the skewness you found in b?
+  
+```{r}
+hist(cleaned_loan_default_data_set$num_card_inq_24_month, main = "Number of Credit Card Inquiries in Last 24 Months", xlab = "Number of Inquiries", ylim = c(0,1200), col = "orange")
+
+hist(cleaned_loan_default_data_set$tot_amount_currently_past_due, main = "Total Amount Past Due for All Credit Accounts", xlab = "Amount Past Due", ylim = c(0,1500), col = "pink")
+
+hist(cleaned_loan_default_data_set$credit_age, main ="Credit age", xlab = "Age in Months", ylim = c(0,5000), col = "purple")
+```
+
+The shapes of the histograms confirm the skewness I found in part b. 
+
+  d.	How would your convert the “rep_education” column into numerical data? Name two ways. 
+  
+  1) There are four character classifications for the variable "rep_education". They could be assigned numbers 1-4. High-school degree would be 1, college degree would be 2, graduate degree would be 3, other would be 4. 
+  
+  2) Another way would be to use the as.numeric() function within R, after using as.character() to convert the character data to character vectors. 
+ 
+3.	Data Visualization:
+    For every graph in this section, remember to label your axes and to include a title. Feel free to play around with graphics and parameters. Have fun and explore!
+
+  a.	Plot a bar graph for the “Def_Ind” column and describe it. 
+
+```{r}
+barplot(table(cleaned_loan_default_data_set$Def_ind), main ="Indicator of Default", xlab = "Not Defaulted (0) vs Defaulted (1)", ylab = "Frequency", col = "blue", ylim = c(0,20000))
+```
+The bar graph for the "Def_Ind" column shows the frequency of those who have either had an account defaulted after an account was approved and opened with a bank in the past 18 months, or have not had an account defaulted. The variable is binary, with those who have had an account defaulted represented by 1 and those who haven't represented by 0. 
+
+  b.	Plot a bar graph for the “rep_education" column and describe it. 
+  
+```{r}
+barplot(table(cleaned_loan_default_data_set$rep_education), main ="Education Level", xlab = "Level", ylab = "Frequency", col = "green", ylim = c(0,20000))  
+```
+This bar graph shows the frequencies of the different levels of education present in the data set. The four levels are college (most frequent), graduate, high scool, and other (least frequent).
+
+  c.	Plot a histogram of the “rep_income” variable.
+  
+```{r}
+hist(cleaned_loan_default_data_set$rep_income, main = "Annual (Self-Reported) Income", xlab = "Income", col = "red")
+```
+This histogram represents the frequencies of the different self-reported annual incomes in the data set. This variable has a bell-shaped distribution as shown in the histogram. 
+
+  d.	Plot a boxplot of the “tot_balance” variable. Using the box plot report the five number summary of the variable? Are there any outliers for this variable? 
+
+```{r}
+boxplot(cleaned_loan_default_data_set$tot_balance, horizontal = TRUE, main = "Box Plot for Total Available Balance", ylab = "Balance in Dollars", col = "lavender")
+summary(cleaned_loan_default_data_set$tot_balance)
+```
+Min = 0, 1st Quartile = 92142, Median = 107740, 3rd Quartile = 122932, Max = 200000 
+
+As shown in the boxplot, there are many outliers in this column of the data set.
+

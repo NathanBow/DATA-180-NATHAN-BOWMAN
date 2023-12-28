@@ -7,6 +7,7 @@ date: "2023-12-09"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+40/40. Good job Nathan. This is very well done. 
 
 Nathan Bowman
 12/9/23
@@ -14,7 +15,9 @@ Prof. Odongo
 Data 180
 
 #Imported data set via excel and skipped first line so variable names are not apart of data set
-
+```{r}
+loan_default_data_set<-read.csv("C:/Users/rodge/OneDrive/Desktop/DATA 180 -Intoduction to Data Science/DATA-180-Introduction-to-Data-Science--Section-2/data/loan_default_data_set.csv")
+```
 1.	Data wrangling:
   
   a.	What is the dimension (shape) of the data set?  How many rows and columns does the data set have?
@@ -77,6 +80,9 @@ I think the best way to deal with the missing values is to remove any row contai
   f.	With this data, would you fit a supervised or an unsupervised learning model? Why? 
   
 This data set would fit a supervised learning model as it gives us data classified into 21 columns of information important for considering acceptance of credit loans. It can be used to model relationships between the predictor and repsonse variables. 
+
+
+#You fit a supervised learning model because you have a dependent and independent variables. 
   
   g.	For part 2 and 3 drop all rows of the data that contain missing values. Print the dimensions of the resulting data set that has no missing values.
   
